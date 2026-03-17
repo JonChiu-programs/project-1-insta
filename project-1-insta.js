@@ -23,7 +23,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
    constructor() {
     super();
     this.currentIndex = 0;
-    this.totalSlides = 0; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
+    this.total = 0; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
   }
 
   // Lit reactive properties
@@ -31,7 +31,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       currentIndex: { type: Number },
-      totalSlides: {type : Number} //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
+      total: {type : Number} //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
     };
   }
 
@@ -76,19 +76,18 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     @previous="${this.previous}"
     @next="${this.next}">
     <slot></slot>
-  </insta-arrow>
-
-  <insta-indicator
+    <insta-indicator
     @insta-index-changed="${this.handleEvent}"
     .total="${this.slides ? this.slides.length : 0}"
     .currentIndex="${this.currentIndex}">
   </insta-indicator>
+  </insta-arrow>
   </div>`;
   }
 
   firstUpdated() {
   this.slides = Array.from(this.querySelectorAll("insta-slide"));
-  this.totalSlides = this.slides.length; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
+  this.total = this.slides.length; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
   this.changeSlide();
   }
   

@@ -23,18 +23,28 @@
     }
 
     insta-slide{
-      text-align: left;
+      text-align: center;
       font-size: 200px;
     }
 
+    insta-card{
+      display: block;
+        /* outline: auto; I'm just keeping this line as I found it by accident and I found the results to be fascinating despite not being what I was going for. */ 
+        transform: translateY(-70px);
+        width: 700px;
+        height: 800px;
+        border: var(--ddd-border-md);
+        text-align: center;
+      font-size: 200px;
+        }
+
     h3{
-      text-align: left;
+      text-align: center;
       position: flex;
     }
 
     hr{
       width: 75px;
-      transform: translateX(-228px);
       color: white;
     }
 
@@ -71,14 +81,16 @@
   <div id="demo">
     <h1>project-1-insta</h1>
 
-    <h2>Default</h2>
+    <h2>Bottom text</h2>
     <project-1-insta>
 
 
       <insta-slide>
+        <insta-card>
         <h3>Hello</h3>
         <hr>
         <p>slide 1</p>
+        </insta-card>
       </insta-slide>
       <insta-slide>
         <h3>Hello</h3>

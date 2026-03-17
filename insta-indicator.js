@@ -55,13 +55,13 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: var(--ddd-theme-default-beaverBlue);
+    background-color: red;
     opacity: 0.7;
     }
     
     .dot.active {
     opacity: 1;
-    background-color: red;
+    background-color: white;
     }
         `];
   }
