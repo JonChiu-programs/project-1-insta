@@ -59,10 +59,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         font-size: var(--play-list-project-label-font-size, var(--ddd-font-size-s));
       }
 
-      insta-indicator{
-          transform: translateX(200px);
-        }
-
         insta-card{
       display: block;
         /* outline: auto; I'm just keeping this line as I found it by accident and I found the results to be fascinating despite not being what I was going for. */ 
