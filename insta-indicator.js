@@ -76,6 +76,7 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     return html`
       <div class="dots">
         ${dots}
+        <slot></slot>
       </div>`;
   }
 

@@ -23,6 +23,7 @@
     }
 
     insta-slide{
+      align-content: center;
       text-align: center;
       font-size: 200px;
     }
@@ -31,12 +32,19 @@
       display: block;
         /* outline: auto; I'm just keeping this line as I found it by accident and I found the results to be fascinating despite not being what I was going for. */ 
         transform: translateY(-70px);
-        width: 700px;
+        width: 1000px;
         height: 800px;
         border: var(--ddd-border-md);
         text-align: center;
       font-size: 200px;
         }
+
+    .glyph{
+      align-content: center;
+      width: 500px;
+      height: 500px;
+      margin-bottom: -100px;
+    }
 
     h3{
       text-align: center;
@@ -89,12 +97,14 @@
         <insta-card>
         <h3>Hello</h3>
         <hr>
+        <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="Light Glyph from The Owl House"> 
         <p>slide 1</p>
         </insta-card>
       </insta-slide>
       <insta-slide>
         <h3>Hello</h3>
         <hr>
+        <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="Light Glyph from The Owl House"> 
         <p>slide 2</p>
       </insta-slide>
       <insta-slide> 

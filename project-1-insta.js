@@ -7,6 +7,7 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./insta-arrow.js";
 import "./insta-indicator.js";
+import "./insta-like-counter.js";
 
 /**
  * `project-1-insta`
@@ -80,6 +81,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     @insta-index-changed="${this.handleEvent}"
     .total="${this.slides ? this.slides.length : 0}"
     .currentIndex="${this.currentIndex}">
+    <insta-like-counter></insta-like-counter>
   </insta-indicator>
   </insta-arrow>
   </div>`;
