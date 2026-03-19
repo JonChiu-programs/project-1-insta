@@ -55,8 +55,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         padding: var(--ddd-spacing-4);
       }
 
-      h3 span {
-        font-size: var(--play-list-project-label-font-size, var(--ddd-font-size-s));
+      h3 {
+        font-size: 80px;
       }
 
         insta-card{
@@ -64,19 +64,19 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         /* outline: auto; I'm just keeping this line as I found it by accident and I found the results to be fascinating despite not being what I was going for. */ 
         transform: translateY(-50px);
         width: 1000px;
-        height: 700px;
+        height: 500px;
         border: var(--ddd-border-md);
         text-align: center;
-        font-size: 100px;
+        font-size: 50px;
         overflow-y: scroll;
         }
 
         insta-indicator{
-          transform: translate(430px, -50px);
+          transform: translate(430px, -150px);
         }
 
         insta-like-counter{
-          transform: translate(-200px, 135px);
+          transform: translate(-250px, 35px);
         }
 
 
@@ -86,9 +86,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     }
 
     hr{
-      width: 75px;
       color: white;
-      padding-bottom: 20px;
+      padding-bottom: 0px;
     }
         
       @media (min-width: 500px) and (max-width: 800px){

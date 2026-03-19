@@ -77,11 +77,16 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
         text-align: center;
         padding-bottom: 10px;
         background-color: red;
+        border-width: 5px;
+        border-color: white;
+        align-content: center;
+        box-shadow: none;
       }
 
       .glyph{
         height: 100px;
         width: 100px;
+        transform: translateY(-4px);
       }
 
       .addButton:focus{
