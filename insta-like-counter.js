@@ -67,12 +67,12 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
       .number{
         margin-left: 265px;
         font-size: 100px;
-        transform: translateY(130px);
+        transform: translate(-100px, 125px);
       }
 
       .addButton{
         height: 100px;
-        width: 200px;
+        width: 150px;
         font-size: 65px;
         text-align: center;
         padding-bottom: 10px;
@@ -101,7 +101,7 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
       <div class="wrapper">
         <h3 class="number">${this.count}</h3>
         <button class="addButton" @click="${this.increment}">
-        <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="Light Glyph from The Owl House">
+        <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="the like button">
         </button>
         <slot></slot>
       </div>`;

@@ -62,9 +62,9 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         insta-card{
       display: block;
         /* outline: auto; I'm just keeping this line as I found it by accident and I found the results to be fascinating despite not being what I was going for. */ 
-        transform: translateY(-70px);
+        transform: translateY(-50px);
         width: 1000px;
-        height: 800px;
+        height: 700px;
         border: var(--ddd-border-md);
         text-align: center;
         font-size: 100px;
@@ -72,7 +72,11 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         }
 
         insta-indicator{
-          transform: translateX(220px);
+          transform: translate(430px, -50px);
+        }
+
+        insta-like-counter{
+          transform: translate(-200px, 135px);
         }
 
 
@@ -114,8 +118,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     @insta-index-changed="${this.handleEvent}"
     .total="${this.slides ? this.slides.length : 0}"
     .currentIndex="${this.currentIndex}">
-    <insta-like-counter></insta-like-counter>
   </insta-indicator>
+  <insta-like-counter></insta-like-counter>
   </insta-arrow>
   </div>`;
   }
