@@ -71,6 +71,10 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         overflow-y: scroll;
         }
 
+        insta-indicator{
+          transform: translateX(220px);
+        }
+
 
     h3{
       text-align: center;

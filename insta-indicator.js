@@ -70,17 +70,16 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     let dots = [];
       for (let i = 0; i < this.total; i++) {
       dots.push(html`
-      <span class="dot ${i === this.currentIndex ? 'active' : ''}" @click="${this.handleDotClick}" data-index="${i}"></span>
+      <span class="dot ${i === this.currentIndex ? "active" : ""}" @click="${this._handleDotClick}" data-index="${i}"></span>
       `);
     }
     return html`
       <div class="dots">
         ${dots}
-        <slot></slot>
       </div>`;
   }
 
-  handleDotClick(){
+  _handleDotClick(e){
     const indexChange = new CustomEvent("insta-index-changed", {
         composed: true,
         bubbles: true,
