@@ -18,6 +18,7 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     return "insta-indicator";
   }
 
+  //Note: indicator remains largely unchanged from playlist-project with no need to integrate specific code from bpark5 save for in project-1-insta
   constructor() {
     super();
         this.total = 0;

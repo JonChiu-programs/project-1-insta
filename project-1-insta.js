@@ -25,6 +25,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     super();
     this.currentIndex = 0;
     this.total = 0; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
+    this.totalImages = 0; // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
   }
 
   // Lit reactive properties
@@ -32,7 +33,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       currentIndex: { type: Number },
-      total: {type : Number} //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
+      total: {type : Number}, //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
+      totalImages: {type : Number} // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
     };
   }
 
@@ -102,8 +104,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html`
-<div class="wrapper">
-
+    <state-container id="keepState">
+    <div class="wrapper">
   <insta-arrow
     @previous="${this.previous}"
     @next="${this.next}">
@@ -120,7 +122,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   </insta-indicator>
   <insta-like-counter></insta-like-counter>
   </insta-arrow>
-  </div>`;
+  </div>
+    </state-container>`;
   }
 
   firstUpdated() {
@@ -129,6 +132,33 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   this.changeSlide();
   this.getFox(); //Need to figure out how to prevent duplicate images on a slide that already has one.
   }
+
+  // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
+  updated(changedProperties) {
+    if (super.updated) {
+      super.updated(changedProperties);
+    }
+    if (changedProperties.has('currentIndex')) {
+      const check = changedProperties.get('currentIndex');
+        if(check != currentIndex){
+            this.changeState();
+        }
+      // do your testing of the value and make it rain by calling makeItRain
+    }
+  }
+
+
+  changeState() {
+    import("http://localhost:8000/").then(
+      (module) => {
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#keepState").setAttribute("popped", "");
+        }, 0);
+      }
+    );
+  }
+  // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
+  
   
   changeSlide() {
   this.slides.forEach((slide, i) => {
