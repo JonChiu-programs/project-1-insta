@@ -1,0 +1,24 @@
+{
+  "name": "value",        
+  "name": 67,            
+  "name": true,            
+  "name": ["cool", "guy"],
+  "name": {               
+    "last" : "Olle",
+    "first": "B"
+  },
+  "name": [               
+    {
+      "link": "https://hax.psu.edu",
+      "label": "HAX PSU"
+    },
+    {
+      "link": "https://haxtheweb.org",
+      "label": "HAX Docs"
+    },
+    {
+      "link": "https://hax.cloud",
+      "label": "HAX Experiments"
+    }
+  ]
+}

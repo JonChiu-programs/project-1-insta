@@ -25,7 +25,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     super();
     this.currentIndex = 0;
     this.total = 0; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
-    this.totalImages = 0; // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
+    this.totalImages = this.total;
+    this.loading = true;
   }
 
   // Lit reactive properties
@@ -34,7 +35,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
       ...super.properties,
       currentIndex: { type: Number },
       total: {type : Number}, //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
-      totalImages: {type : Number} // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
+      totalImages: {type : Number}, // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
+      loading: {type : Boolean}
     };
   }
 
@@ -59,6 +61,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
 
       h3 {
         font-size: 80px;
+        text-align: center;
+      position: flex;
       }
 
         insta-card{
@@ -81,15 +85,13 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
           transform: translate(-250px, 35px);
         }
 
-
-    h3{
-      text-align: center;
-      position: flex;
-    }
-
     hr{
       color: white;
-      padding-bottom: 0px;
+      padding-bottom: 20px;
+    }
+
+    .test{
+      font-size: 20px;
     }
         
       @media (min-width: 500px) and (max-width: 800px){
@@ -104,7 +106,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html`
-    <state-container id="keepState">
     <div class="wrapper">
   <insta-arrow
     @previous="${this.previous}"
@@ -112,8 +113,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     <insta-card>
       <h3>Hello</h3>
         <hr>
-        <p>Look at all these foxes!</p>
         <slot></slot>
+        <p class = "text">Look at all these foxes!</p>
     </insta-card>
     <insta-indicator
     @insta-index-changed="${this.handleEvent}"
@@ -122,47 +123,26 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   </insta-indicator>
   <insta-like-counter></insta-like-counter>
   </insta-arrow>
-  </div>
-    </state-container>`;
+  </div>`;
   }
 
   firstUpdated() {
   this.slides = Array.from(this.querySelectorAll("insta-slide"));
   this.total = this.slides.length; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
   this.changeSlide();
-  this.getFox(); //Need to figure out how to prevent duplicate images on a slide that already has one.
+  this.getFox();
   }
 
-  // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
-  updated(changedProperties) {
-    if (super.updated) {
-      super.updated(changedProperties);
-    }
-    if (changedProperties.has('currentIndex')) {
-      const check = changedProperties.get('currentIndex');
-        if(check != currentIndex){
-            this.changeState();
-        }
-      // do your testing of the value and make it rain by calling makeItRain
-    }
+  //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
+  loadFoxForAllSlides() {
+    if (!this.slides.length) return;
+    this.loadFoxIntoSlide(this.slides[this.currentIndex]);
   }
-
-
-  changeState() {
-    import("http://localhost:8000/").then(
-      (module) => {
-        setTimeout(() => {
-          this.shadowRoot.querySelector("#keepState").setAttribute("popped", "");
-        }, 0);
-      }
-    );
-  }
-  // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
-  
   
   changeSlide() {
+  this.loadFoxIntoSlide(this.slides[this.currentIndex]);
   this.slides.forEach((slide, i) => {
-      slide.style.display = i === this.currentIndex ? "block" : "none";
+  slide.style.display = i === this.currentIndex ? "block" : "none";
   });
   const indexChange = new CustomEvent("insta-index-changed", {
   composed: true,
@@ -179,7 +159,7 @@ next() {
   if (this.currentIndex < this.slides.length - 1) {
       this.currentIndex++;
       this.changeSlide();
-      this.getFox(); //For when I need a laugh: the reason why this line wasn't working was because I put a "," instead of a "." on accident lol.
+      this.loadFoxIntoSlide(this.slides[this.currentIndex]);
     }
 }
 
@@ -187,6 +167,7 @@ previous() {
   if (this.currentIndex > 0) {
     this.currentIndex--;
     this.changeSlide();
+    this.loadFoxIntoSlide(this.slides[this.currentIndex]);
   }
 }
 
@@ -194,27 +175,25 @@ handleEvent(e){
   this.currentIndex = e.detail.index;
   this.changeSlide();
 }
-
-getFox() { //Adapted from btopro example; comments are kept in to remind me what everything is supposed to do.
-      fetch("https://randomfox.ca/floof/").then((resp) => {
-      // headers indicating the request was good, then process it
-      if (resp.ok) {
-        // return the response as JSON. .text() is another valid response
-        // though that's more useful for HTML / non data object responses
-        return resp.json();
-      }
-    })
-    .then((data) => {
-        // THEN after the 2nd promise resolves, do this
-        // the data being passed in, whill be the response object as json()
-        // from the previous Promise resolving
-        // here we can see that data.image allows us to access the image
-        // attribute in the response
-        let image = document.createElement('img');
-        image.src = data.image;
-        image.loading = "lazy";
-        this.appendChild(image);
-    });
+  //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
+  async loadFoxIntoSlide(slide) { //Takes this.slide as input
+    try {
+      const response = await fetch("https://randomfox.ca/floof/"); //Does the fetching of fox images
+      const data = await response.json(); 
+      slide.querySelectorAll("img").forEach(img => img.remove()); //Removes an existing image to make way for a new image; need to solve this.
+      const img = document.createElement("img");
+      //Additional image information
+      img.src = data.image;
+      img.alt = "Random Fox";
+      img.style.width = "500px";
+      img.style.height = "200px";
+      img.style.borderRadius = "8px";
+      img.loading = "lazy";
+      slide.appendChild(img); //Crates image with additional info
+    } 
+    catch (error) { //Reads an error in case of failure
+      console.error("Error fetching fox image:", error);
+    }
   }
 }
 

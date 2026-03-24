@@ -18,7 +18,6 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     return "insta-indicator";
   }
 
-  //Note: indicator remains largely unchanged from playlist-project with no need to integrate specific code from bpark5 save for in project-1-insta
   constructor() {
     super();
         this.total = 0;
@@ -71,16 +70,17 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     let dots = [];
       for (let i = 0; i < this.total; i++) {
       dots.push(html`
-      <span class="dot ${i === this.currentIndex ? "active" : ""}" @click="${this._handleDotClick}" data-index="${i}"></span>
+      <span class="dot ${i === this.currentIndex ? "active" : ""}" @click="${this.handleDotClick}" data-index="${i}"></span>
       `);
     }
     return html`
+    <slot></slot>
       <div class="dots">
         ${dots}
       </div>`;
   }
 
-  _handleDotClick(e){
+  handleDotClick(e){
     const indexChange = new CustomEvent("insta-index-changed", {
         composed: true,
         bubbles: true,
