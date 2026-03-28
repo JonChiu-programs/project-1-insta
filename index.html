@@ -19,8 +19,9 @@
       margin: var(--ddd-spacing-2);
       border: var(--ddd-border-md);
       border-radius: var(--ddd-radius-lg);
-      background-color: blue;
-      height: 700px;
+      background-color: var(--ddd-theme-default-limestoneGray);
+      border-color: var(--ddd-theme-default-potential70);
+      height: 800px;
       width: 1200px;
     }
 
@@ -34,7 +35,6 @@
           margin: var(--ddd-spacing-2);
           border: var(--ddd-border-md);
           border-radius: var(--ddd-radius-lg);
-          background-color: blue;
         }
 
         insta-slide{
@@ -48,6 +48,17 @@
           position: flex;
         }
       }
+
+      @media (prefers-color-scheme: dark) {
+          project-1-insta {
+            margin: var(--ddd-spacing-2);
+            border: var(--ddd-border-md);
+            border-radius: var(--ddd-radius-lg);
+            background-color: var(--ddd-theme-default-info);
+            height: 800px;
+            width: 1200px;
+          }
+        }
   </style>
   <title>project-1-insta</title>
 </head>
@@ -56,6 +67,26 @@
   <div id="demo">
     <h1>project-1-insta</h1>
     <project-1-insta>
+
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
+      
+      <insta-slide></insta-slide>
 
       <insta-slide></insta-slide>
       

@@ -20,9 +20,8 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.count = "0";
-    this.min = "0";
-    this.max = "0";
+    this.likeCount = "0";
+    this.dislikeCount = "0";
     this.title = "";
     this.t = this.t || {};
     this.t = {
@@ -36,9 +35,8 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       title: { type: String },
-      count: {type : Number, reflect: true},
-      min: {type : Number},
-      max: {type : Number},
+      likeCount: {type : Number},
+      dislikeCount: {type : Number}
     };
   }
 
@@ -49,14 +47,28 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
       :host {
         height: 0px;
         width: 0px;
-        display: inline-block;
+        display: block;
         color: var(--ddd-theme-primary);
         background-color: var(--ddd-theme-default-beaverBlue);
         font-family: var(--ddd-font-navigation);
       }
 
       .wrapper {
-        margin: var(--ddd-spacing-2);
+        display: inline-block;
+        margin-top: var(--ddd-spacing-0);
+        padding: var(--ddd-spacing-1);
+      }
+
+      .likes{
+        display: inline-block;
+        margin-top: var(--ddd-spacing-15);
+        padding: var(--ddd-spacing-4);
+      }
+
+      .dislikes{
+        display: inline-block;
+        transform: translate(200px, -280.5px);
+        margin-top: var(--ddd-spacing-15);
         padding: var(--ddd-spacing-4);
       }
       
@@ -65,36 +77,68 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
       }
 
       .number{
+        display: inline-block;
         margin-left: 265px;
-        font-size: 100px;
-        transform: translate(-100px, 125px);
+        font-size: 50px;
+        transform: translate(-150px, 90px);
       }
 
-      .addButton{
-        height: 100px;
-        width: 150px;
+      .likeButton{
+        display: inline-block;
+        height: 80px;
+        width: 110px;
         font-size: 65px;
         text-align: center;
         padding-bottom: 10px;
-        background-color: red;
+        background-color: var(--ddd-theme-default-error);
         border-width: 5px;
-        border-color: white;
+        border-color: var(--ddd-theme-default-beaverBlue);
         align-content: center;
-        box-shadow: none;
+      }
+
+      .dislikeButton{
+        display: inline-block;
+        height: 80px;
+        width: 110px;
+        font-size: 65px;
+        text-align: center;
+        padding-bottom: 10px;
+        background-color: var(--ddd-theme-default-error);
+        border-width: 5px;
+        border-color: var(--ddd-theme-default-beaverBlue);
+        align-content: center;
       }
 
       .glyph{
-        height: 100px;
-        width: 100px;
+        height: 50px;
+        width: 50px;
         transform: translateY(-4px);
       }
 
-      .addButton:focus{
-        background-color: var(--ddd-theme-default-creekTeal);
+      .likeButton:focus{
+        background-color: var(--ddd-theme-default-success);
       }
 
-      .addButton:hover{
-        background-color: var(--ddd-theme-default-creekTeal);
+      .likeButton:hover{
+        background-color: var(--ddd-theme-default-warning);
+      }
+
+      .dislikeButton:focus{
+        background-color: var(--ddd-theme-default-success);
+      }
+
+      .dislikeButton:hover{
+        background-color: var(--ddd-theme-default-warning);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .likeButton{
+        border-color: var(--ddd-theme-default-white);
+      }
+
+      .dislikeButton{
+        border-color: var(--ddd-theme-default-white);
+      }
       }
     `];
   }
@@ -104,16 +148,46 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
       <div class="wrapper">
-        <h3 class="number">${this.count}</h3>
-        <button class="addButton" @click="${this.increment}">
+      <div class = "likes"><h3 class="number">${this.likeCount}</h3>
+        <button class="likeButton" @click="${this.upVote}">
         <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="the like button">
         </button>
-        <slot></slot>
+      </div>
+      <div class = "dislikes">
+        <h3 class="number">${this.dislikeCount}</h3>
+        <button class="dislikeButton" @click="${this.downVote}">
+        <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="the like button" style="transform: rotate(180deg);">
+        </button>
+      </div>
       </div>`;
   }
 
-  increment(){
-      this.count++;
+  //Adapted from dcagliola's code; Notes are meant to help me understand what is happening
+  async firstUpdated() {
+    this.loadFromStore();
+  }
+
+  upVote(){
+    this.likeCount++;
+    this.saveToStore();
+  }
+
+  downVote(){
+    this.dislikeCount++;
+    this.saveToStore();
+  }
+
+  saveToStore(){
+    localStorage.setItem("likeClicks", JSON.stringify(this.likeCount)); //If these variables exist, creates an item in local storage
+    localStorage.setItem("dislikeClicks", JSON.stringify(this.dislikeCount));
+  }
+
+  loadFromStore(){
+    const clickLikes = localStorage.getItem("likeClicks"); //Gets the set items and creates workable variables.
+    const clickDislikes = localStorage.getItem("dislikeClicks");
+
+    if (clickDislikes) this.dislikeCount = JSON.parse(clickDislikes);//Returns values from const variables to the upvote & downvote variables
+    if (clickLikes) this.likeCount = JSON.parse(clickLikes);
   }
 }
 globalThis.customElements.define(InstaLikeCounter.tag, InstaLikeCounter);

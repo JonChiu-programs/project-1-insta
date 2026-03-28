@@ -52,16 +52,26 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
 
     .dot {
     visibility: visible;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background-color: red;
+    background-color: var(--ddd-theme-default-skyBlue);
     opacity: 0.7;
     }
     
     .dot.active {
     opacity: 1;
-    background-color: white;
+    background-color: var(--ddd-theme-default-navy80);
+    }
+
+    @media (prefers-color-scheme: dark) {
+    .dot {
+    background-color: var(--ddd-theme-default-keystoneYellow);
+    }
+    
+    .dot.active {
+    background-color: var(--ddd-theme-default-disabled);
+    }
     }
         `];
   }
