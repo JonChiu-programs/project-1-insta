@@ -28,7 +28,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     this.totalImages = this.total;
     this.loading = true;
     this.value = 1;
-    this.url = ""
+    this.url = new URL(window.location.href);
   }
 
   // Lit reactive properties
@@ -183,8 +183,8 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   this.slides = Array.from(this.querySelectorAll("insta-slide"));
   this.total = this.slides.length; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
   this.changeSlide();
+  this.loadState();
   this.updateQueryParam("currentIndex", this.value);
-  this.loadUrl();
   }
 
   //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
@@ -198,7 +198,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   this.loadFoxIntoSlide(this.slides[this.currentIndex]);
   this.slides.forEach((slide, i) => {
   slide.style.display = i === this.currentIndex ? "block" : "none";
-  this.saveState();
   });
   const indexChange = new CustomEvent("insta-index-changed", {
   composed: true,
@@ -262,6 +261,10 @@ handleEvent(e){
 
     // Update the browser URL without reloading
     history.pushState(null, '', currentUrl.toString());
+    const queryString = window.location.search; 
+    console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
+    const name = urlParams.get('currentIndex'); // '1'
     saveUrl(currentUrl);
   }
 
@@ -271,7 +274,7 @@ handleEvent(e){
 
   loadUrl(){
     const urlCurrent = localStorage.getItem("currentUrlLink");
-    if (urlCUrrent) this.url = JSON.parse(urlCurrent);
+    if (urlCurrent) this.url = JSON.parse(urlCurrent);
   }
 
   saveState(){
@@ -282,6 +285,15 @@ handleEvent(e){
     const currentSlide = localStorage.getItem("currentState");
     if (currentSlide) this.url = JSON.parse(currentSlide);
   }
+
+  /*
+    // Get the full query string part of the URL (e.g., "?name=Ian&lastname=Felix")
+    const queryString = window.location.search; 
+
+    // Create a URLSearchParams object
+    const urlParams = new URLSearchParams(queryString);
+    const name = urlParams.get('currentIndex'); // '1'
+*/
 }
 
 globalThis.customElements.define(Project1Insta.tag, Project1Insta);
