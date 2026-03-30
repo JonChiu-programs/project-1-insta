@@ -27,7 +27,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     this.total = 0; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
     this.totalImages = this.total;
     this.loading = true;
-    this.value = 1;
     this.url = new URL(window.location.href);
   }
 
@@ -39,7 +38,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
       total: {type : Number}, //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
       totalImages: {type : Number}, // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
       loading: {type : Boolean},
-      value: {type : Number},
       url: {type : String}
     };
   }
@@ -66,6 +64,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
       }
 
       h3 {
+        display: inline-block;
         font-size: 80px;
         text-align: center;
       position: flex;
@@ -95,6 +94,14 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
           display: block;
           transform: translate(-600px, 150px);
         }
+
+    .avatar{
+      display: inline-block;
+      height: 70px;
+      width: 70px;
+      background-color: white;
+      border-radius: 100%;
+    }
 
     hr{
       color: var(--ddd-theme-default-potential70);
@@ -164,6 +171,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     @previous="${this.previous}"
     @next="${this.next}">
     <insta-card>
+      <img class="avatar" alt="author" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png">
       <h3>Hello</h3>
         <hr>
         <slot></slot>
@@ -184,7 +192,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   this.total = this.slides.length; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
   this.changeSlide();
   this.loadState();
-  this.updateQueryParam("currentIndex", this.value);
   }
 
   //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
@@ -194,7 +201,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   }
   
   changeSlide() {
-  this.loadState();
   this.loadFoxIntoSlide(this.slides[this.currentIndex]);
   this.slides.forEach((slide, i) => {
   slide.style.display = i === this.currentIndex ? "block" : "none";
@@ -203,10 +209,11 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   composed: true,
   bubbles: true,
   detail: {
-    index: this.currentIndex
+  index: this.currentIndex
   },
 });
 this.dispatchEvent(indexChange);
+console.log(this.currentIndex);
 }
 
 next() {
@@ -215,7 +222,8 @@ next() {
       this.changeSlide();
       this.loadFoxIntoSlide(this.slides[this.currentIndex]); //Loads a fox image to the current slide using this.slides & this.currentIndex as input
       this.value++;
-      this.updateQueryParam("currentIndex", this.value);
+      this.updateQueryParam("currentIndex", this.currentIndex);
+      this.saveState();
     }
   }
 
@@ -225,7 +233,8 @@ previous() {
     this.changeSlide();
     this.value--;
     this.loadFoxIntoSlide(this.slides[this.currentIndex]);
-    this.updateQueryParam("currentIndex", this.value);
+    this.updateQueryParam("currentIndex", this.currentIndex);
+    this.saveState();
   }
 }
 
@@ -236,7 +245,7 @@ handleEvent(e){
   //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
   async loadFoxIntoSlide(slide) { //Takes this.slide as input
     try {
-      const response = await fetch("https://randomfox.ca/floof/"); //Does the fetching of fox images
+      const response = await fetch("https://randomfox.ca/floof/"); //Does the fetching of fox images. GOing to be replaced with "./response.json"
       const data = await response.json(); 
       slide.querySelectorAll("img").forEach(img => img.remove()); //Removes an existing image to make way for a new image; need to solve this.
       const img = document.createElement("img");
@@ -261,20 +270,11 @@ handleEvent(e){
 
     // Update the browser URL without reloading
     history.pushState(null, '', currentUrl.toString());
+
     const queryString = window.location.search; 
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
-    const name = urlParams.get('currentIndex'); // '1'
-    saveUrl(currentUrl);
-  }
-
-  saveUrl(){
-    localStorage.setItem("currentUrlLink", JSON.stringify(this.currentURL));
-  }
-
-  loadUrl(){
-    const urlCurrent = localStorage.getItem("currentUrlLink");
-    if (urlCurrent) this.url = JSON.parse(urlCurrent);
+    const name = urlParams.get('currentIndex');
   }
 
   saveState(){
@@ -284,6 +284,8 @@ handleEvent(e){
   loadState(){
     const currentSlide = localStorage.getItem("currentState");
     if (currentSlide) this.url = JSON.parse(currentSlide);
+    if (currentSlide) this.currentIndex = JSON.parse(currentSlide);
+
   }
 
   /*
