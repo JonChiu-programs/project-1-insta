@@ -54,7 +54,7 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     visibility: visible;
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: var(--ddd-radius-circle);
     background-color: var(--ddd-theme-default-skyBlue);
     opacity: 0.7;
     }
@@ -80,7 +80,7 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
     let dots = [];
       for (let i = 0; i < this.total; i++) {
       dots.push(html`
-      <span class="dot ${i === this.currentIndex ? "active" : ""}" @click="${this.handleDotClick}" data-index="${i}"></span>
+      <span class="dot ${i === this.currentIndex ? "active" : ""}" @click="${this.handleDotClick}" data-index="${i}"><slot></slot></span>
       `);
     }
     return html`
@@ -89,7 +89,7 @@ export class InstaIndicator extends DDDSuper(I18NMixin(LitElement)) {
         ${dots}
       </div>`;
   }
-
+  
   handleDotClick(e){
     const indexChange = new CustomEvent("insta-index-changed", {
         composed: true,

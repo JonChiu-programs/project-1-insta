@@ -25,7 +25,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     super();
     this.currentIndex = 0;
     this.total = 0; //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
-    this.totalImages = this.total;
     this.loading = true;
     this.url = new URL(window.location.href);
   }
@@ -36,7 +35,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
       ...super.properties,
       currentIndex: { type: Number },
       total: {type : Number}, //This line of code is adapted from bpark5 in order to get indicator dots to appear without needing user input
-      totalImages: {type : Number}, // Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.Code for check-in-2 meant to preserve the slide that is actively being displayed upon refresh of browser; please ignore for now.
       loading: {type : Boolean},
       url: {type : String}
     };
@@ -65,10 +63,10 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
 
       h3 {
         display: inline-block;
-        font-size: 80px;
+        font-size: var(--ddd-font-size-ml);
         text-align: center;
-      position: flex;
-      color: var(--ddd-theme-default-potential70);
+        color: var(--ddd-theme-default-potential70);
+        transform: translateY(-15px);
       }
 
         insta-card{
@@ -76,10 +74,10 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         /* outline: auto; I'm just keeping this line as I found it by accident and I found the results to be fascinating despite not being what I was going for. */ 
         transform: translateY(-46px);
         width: 1500px;
-        height: 600px;
+        height: 700px;
         border: var(--ddd-border-md);
         text-align: center;
-        font-size: 50px;
+        font-size: var(--ddd-font-size-2xs);
         overflow-y: scroll;
         border-color: var(--ddd-theme-default-potential70);
         }
@@ -95,21 +93,28 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
           transform: translate(-600px, 150px);
         }
 
+    .account{
+      text-align: left;
+      transform: translateY(10px);
+      padding-left: var(--ddd-spacing-5);
+    }
+
     .avatar{
       display: inline-block;
       height: 70px;
       width: 70px;
-      background-color: white;
-      border-radius: 100%;
+      background-color: var(--ddd-theme-default-white);
+      border-radius: var(--ddd-radius-circle);
     }
 
     hr{
       color: var(--ddd-theme-default-potential70);
-      padding-bottom: 20px;
+      padding-bottom: var(--ddd-spacing-2);
     }
 
     .text{
         color: var(--ddd-theme-default-potential70);
+        font-size: var(--ddd-font-size-2sm);
       }
 
       @media (min-width: 500px) and (max-width: 800px){
@@ -137,6 +142,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
 
       .text{
         color: var(--ddd-theme-default-white);
+        transform: translateY(-10px);
       }
 
       h3 {
@@ -151,7 +157,7 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
         height: 600px;
         border: var(--ddd-border-md);
         text-align: center;
-        font-size: 50px;
+        font-size: var(--ddd-font-size-xl);
         overflow-y: scroll;
         border-color: var(--ddd-theme-default-white);
         }
@@ -171,8 +177,10 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
     @previous="${this.previous}"
     @next="${this.next}">
     <insta-card>
-      <img class="avatar" alt="author" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png">
-      <h3>Hello</h3>
+      <div class="account">
+        <img class="avatar" alt="author" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png">
+      <h3>JonChiu-programs</h3>
+      </div>
         <hr>
         <slot></slot>
         <p class = "text">Look at all these foxes!</p>
@@ -213,7 +221,6 @@ export class Project1Insta extends DDDSuper(I18NMixin(LitElement)) {
   },
 });
 this.dispatchEvent(indexChange);
-console.log(this.currentIndex);
 }
 
 next() {
@@ -242,18 +249,19 @@ handleEvent(e){
   this.currentIndex = e.detail.index;
   this.changeSlide();
 }
+
   //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
   async loadFoxIntoSlide(slide) { //Takes this.slide as input
     try {
-      const response = await fetch("https://randomfox.ca/floof/"); //Does the fetching of fox images. GOing to be replaced with "./response.json"
+      const response = await fetch("./response.json"); //Does the fetching of fox images.
       const data = await response.json(); 
       slide.querySelectorAll("img").forEach(img => img.remove()); //Removes an existing image to make way for a new image; need to solve this.
       const img = document.createElement("img");
       //Additional image information
-      img.src = data.image;
+      img.src = data.images[this.currentIndex].src; //Uses currentIndex to change which image is wanted based on its position in the images array in response.json. Connects to the "src" element in each array entry.
       img.alt = "Random Fox";
-      img.style.width = "600px";
-      img.style.height = "300px";
+      img.style.width = "480px";
+      img.style.height = "370px";
       img.style.borderRadius = "8px";
       img.loading = "lazy";
       slide.appendChild(img); //Creates image with additional info to the inputted slide
@@ -270,11 +278,6 @@ handleEvent(e){
 
     // Update the browser URL without reloading
     history.pushState(null, '', currentUrl.toString());
-
-    const queryString = window.location.search; 
-    console.log(queryString);
-    const urlParams = new URLSearchParams(queryString);
-    const name = urlParams.get('currentIndex');
   }
 
   saveState(){
@@ -285,17 +288,7 @@ handleEvent(e){
     const currentSlide = localStorage.getItem("currentState");
     if (currentSlide) this.url = JSON.parse(currentSlide);
     if (currentSlide) this.currentIndex = JSON.parse(currentSlide);
-
   }
-
-  /*
-    // Get the full query string part of the URL (e.g., "?name=Ian&lastname=Felix")
-    const queryString = window.location.search; 
-
-    // Create a URLSearchParams object
-    const urlParams = new URLSearchParams(queryString);
-    const name = urlParams.get('currentIndex'); // '1'
-*/
 }
 
 globalThis.customElements.define(Project1Insta.tag, Project1Insta);

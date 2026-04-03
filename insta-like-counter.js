@@ -55,21 +55,26 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
 
       .wrapper {
         display: inline-block;
+        transform: translateX(-50px);
         margin-top: var(--ddd-spacing-0);
         padding: var(--ddd-spacing-1);
+        height: 2px;
       }
 
       .likes{
         display: inline-block;
+        transform: translateY(28.5px);
         margin-top: var(--ddd-spacing-15);
         padding: var(--ddd-spacing-4);
+        height: 2px;
       }
 
       .dislikes{
         display: inline-block;
-        transform: translate(200px, -280.5px);
+        transform: translate(200px, -203px);
         margin-top: var(--ddd-spacing-15);
         padding: var(--ddd-spacing-4);
+        height: 2px;
       }
       
       h3 span {
@@ -78,20 +83,20 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
 
       .number{
         display: inline-block;
-        margin-left: 265px;
-        font-size: 50px;
-        transform: translate(-150px, 90px);
+        margin-left: var(--ddd-spacing-30);
+        font-size: var(--ddd-font-size-ml);
+        transform: translate(-180px, 75px);
       }
 
       .likeButton{
         display: inline-block;
         height: 80px;
         width: 110px;
-        font-size: 65px;
+        font-size: var(--ddd-font-size-3xs);
         text-align: center;
-        padding-bottom: 10px;
+        padding-bottom: var(--ddd-spacing-3);
         background-color: var(--ddd-theme-default-error);
-        border-width: 5px;
+        border-width: var(--ddd-border-size-lg);
         border-color: var(--ddd-theme-default-beaverBlue);
         align-content: center;
       }
@@ -100,11 +105,11 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
         display: inline-block;
         height: 80px;
         width: 110px;
-        font-size: 65px;
+        font-size: var(--ddd-font-size-3xs);
         text-align: center;
-        padding-bottom: 10px;
+        padding-bottom: var(--ddd-spacing-3);
         background-color: var(--ddd-theme-default-error);
-        border-width: 5px;
+        border-width: var(--ddd-border-size-lg);
         border-color: var(--ddd-theme-default-beaverBlue);
         align-content: center;
       }
@@ -112,7 +117,13 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
       .glyph{
         height: 50px;
         width: 50px;
-        transform: translateY(-4px);
+        transform: translateY(6px);
+      }
+
+      .disLikeGlyph{
+        height: 50px;
+        width: 50px;
+        transform: rotate(180deg) translateY(-6px);
       }
 
       .likeButton:focus{
@@ -156,7 +167,7 @@ export class InstaLikeCounter extends DDDSuper(I18NMixin(LitElement)) {
       <div class = "dislikes">
         <h3 class="number">${this.dislikeCount}</h3>
         <button class="dislikeButton" @click="${this.downVote}">
-        <img class="glyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="the like button" style="transform: rotate(180deg);">
+        <img class="disLikeGlyph" src="https://upload.wikimedia.org/wikipedia/commons/d/da/1-Light_glyph.png" alt="the dislike button">
         </button>
       </div>
       </div>`;

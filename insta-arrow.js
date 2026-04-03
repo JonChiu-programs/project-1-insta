@@ -46,43 +46,37 @@ export class InstaArrow extends DDDSuper(I18NMixin(LitElement)) {
       }
       button {
         background-color: var(--ddd-theme-default-beaverBlue);
-        color: white;
-        border: solid;
+        color: var(--ddd-theme-default-white);
+        border: var(--ddd-border-xs);
         padding: var(--ddd-spacing-2) var(--ddd-spacing-4);
-        border-radius: 100px;
+        border-radius: var(--ddd-radius-rounded);
         cursor: pointer;
-        font-size: 100px;
-        border-color: white;
-        border-width: 2px;
+        font-size: var(--ddd-font-size-xl);
+        border-color: var(--ddd-theme-default-white);;
+        border-width: var(--ddd-border-size-xl);
       }
 
-      button.prev{
-        transform: translateX(-100px);
-      }
-
-      button.next{
-        transform: translateX(100px);
-      }
       button:hover {
         opacity: 0.8;
-        background-color: green;
+        background-color: var(--ddd-theme-default-forestGreen);
       }
 
       button:focus{
-        background-color: red;
+        background-color: var(--ddd-theme-default-original87Pink);
       }
       @media (min-width: 500px) and (max-width: 800px){
         button{
           height: 75%;
           width: 75%;
-          font-size: 75%;
+          font-size: var(--ddd-font-size-5xs);
         }
+
         button.prev{
         transform: translateX(-75px);
       }
 
       button.next{
-        margin-left: 55px;
+        margin-left: var(--ddd-spacing-14);
         transform: translateX(100px);
       }
       }

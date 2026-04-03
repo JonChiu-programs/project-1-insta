@@ -1,99 +1,116 @@
 {
   "author": {               
-    "last" : "Kerr",
-    "first": "Joe"
-  },
-  "images":                
-    [
-  {
-    "id": 1,
-    "username": "AussieExplorer",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Western_Grey_Kangaroo_SMC_2006.JPG"
-  },
-  {
-    "id": 2,
-    "username": "WildlifeLover",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Anton_Faymann_038_Auto_Colour.jpg/250px-Anton_Faymann_038_Auto_Colour.jpg"
-  },
-  {
-    "id": 3,
-    "username": "NatureSnapper",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Artis._Jonge_kangoeroe%2C_Bestanddeelnr_912-5142.jpg/1280px-Artis._Jonge_kangoeroe%2C_Bestanddeelnr_912-5142.jpg"
-  },
-  {
-    "id": 4,
-    "username": "OutbackVibes",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Artis._Jonge_kangoeroe%2C_Bestanddeelnr_912-5143.jpg/1280px-Artis._Jonge_kangoeroe%2C_Bestanddeelnr_912-5143.jpg"
-  },
-  {
-    "id": 5,
-    "username": "RooWatcher",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Eastern_Marsupial_Kangaroo.jpg"
-  },
-  {
-    "id": 6,
-    "username": "DownUnderShots",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Kangaroo_on_the_beach_Cape_Hillsborough%2C_2017.jpg/1920px-Kangaroo_on_the_beach_Cape_Hillsborough%2C_2017.jpg"
-  },
-  {
-    "id": 7,
-    "username": "EcoExplorer",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kangaroo_Australia_01_11_2008_-_retouch.JPG"
-  },
-  {
-    "id": 8,
-    "username": "WildernessWanderer",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Eastern_Grey_Kangaroo_Young_Waiting.JPG"
-  },
-  {
-    "id": 9,
-    "username": "Photoroos",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Kangaroos_at_Miles_Franklin_Park%2C_Talbingo.jpg/1920px-Kangaroos_at_Miles_Franklin_Park%2C_Talbingo.jpg"
-  },
-  {
-    "id": 10,
-    "username": "AussieAdventurer",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Kangaroos_coming_for_dinner%2C_Augathella%2C_Queensland%2C_2024%2C_01.jpg/1920px-Kangaroos_coming_for_dinner%2C_Augathella%2C_Queensland%2C_2024%2C_01.jpg"
-  },
-  {
-    "id": 11,
-    "username": "RooWatcher",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Kangaroos_in_a_grassy_enclosure.jpg"
-  },
-  {
-    "id": 12,
-    "username": "AussieExplorer",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Maleny_Kangaroo_in_countryside_-_panoramio.jpg/1920px-Maleny_Kangaroo_in_countryside_-_panoramio.jpg"
-  },
-  {
-    "id": 13,
-    "username": "NatureSnapper",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Morialta_Conservation_Park_on_6_April_2025_19.jpg/1920px-Morialta_Conservation_Park_on_6_April_2025_19.jpg"
-  },
-  {
-    "id": 14,
-    "username": "WildlifeLover",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Morialta_Conservation_Park_on_6_April_2025_21.jpg/1920px-Morialta_Conservation_Park_on_6_April_2025_21.jpg"
-  },
-  {
-    "id": 15,
-    "username": "OutbackVibes",
-    "thumbnailURL": "hello",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Morialta_Conservation_Park_on_6_April_2025_22.jpg/1920px-Morialta_Conservation_Park_on_6_April_2025_22.jpg"
-  }
+    "last" : "Chiu",
+    "first": "Jon",
+    "startYear": "2025",
+    "thumbnailImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Anton_Faymann_038_Auto_Colour.jpg/250px-Anton_Faymann_038_Auto_Colour.jpg",
+    "channel":	"fox_gallery"
+  },  
+    "images": [
+    {
+      "id": 1,
+      "src": "https://randomfox.ca/images/1.jpg",
+      "thumbnail": "https://randomfox.ca/images/1.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-01"
+    },
+    {
+      "id": 2,
+      "src": "https://randomfox.ca/images/2.jpg",
+      "thumbnail": "https://randomfoxa.ca/images/2.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-02"
+    },
+    {
+      "id": 3,
+      "src": "https://randomfox.ca/images/3.jpg",
+      "thumbnail": "https://randomfox.ca/images/3.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-03"
+    },
+    {
+      "id": 4,
+      "src": "https://randomfox.ca/images/4.jpg",
+      "thumbnail": "https://randomfox.ca/images/4.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-04"
+    },
+    {
+      "id": 5,
+      "src": "https://randomfox.ca/images/5.jpg",
+      "thumbnail": "https://randomfox.ca/images/5.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-05"
+    },
+    {
+      "id": 6,
+      "src": "https://randomfox.ca/images/6.jpg",
+      "thumbnail": "https://randomfox.ca/images/6.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-06"
+    },
+    {
+      "id": 7,
+      "src": "https://randomfox.ca/images/7.jpg",
+      "thumbnail": "https://randomfox.ca/images/7.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-07"
+    },
+    {
+      "id": 8,
+      "src": "https://randomfox.ca/images/8.jpg",
+      "thumbnail": "https://randomfox.ca/images/8.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-08"
+    },
+    {
+      "id": 9,
+      "src": "https://randomfox.ca/images/9.jpg",
+      "thumbnail": "https://randomfox.ca/images/9.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-09"
+    },
+    {
+      "id": 10,
+      "src": "https://randomfox.ca/images/10.jpg",
+      "thumbnail": "https://randomfox.ca/images/10.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-10"
+    },
+    {
+      "id": 11,
+      "src": "https://randomfox.ca/images/11.jpg",
+      "thumbnail": "https://randomfox.ca/images/11.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-11"
+    },
+    {
+      "id": 12,
+      "src": "https://randomfox.ca/images/12.jpg",
+      "thumbnail": "https://randomfox.ca/images/12.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-12"
+    },
+    {
+      "id": 13,
+      "src": "https://randomfox.ca/images/13.jpg",
+      "thumbnail": "https://randomfox.ca/images/13.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-13"
+    },
+    {
+      "id": 14,
+      "src": "https://randomfox.ca/images/14.jpg",
+      "thumbnail": "https://randomfox.ca/images/14.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-14"
+    },
+    {
+      "id": 15,
+      "src": "https://randomfox.ca/images/15.jpg",
+      "thumbnail": "https://randomfox.ca/images/15.jpg",
+      "author": "Random Fox",
+      "date": "2024-01-15"
+    }
   ]
 }
