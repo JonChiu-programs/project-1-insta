@@ -253,12 +253,12 @@ handleEvent(e){
   //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
   async loadFoxIntoSlide(slide) { //Takes this.slide as input
     try {
-      const response = await fetch("/api/response.json"); //Does the fetching of fox images.
+      const response = await fetch("https://randomfox.ca"); //Does the fetching of fox images.  /api/response.json"
       const data = await response.json(); 
       slide.querySelectorAll("img").forEach(img => img.remove()); //Removes an existing image to make way for a new image; need to solve this.
       const img = document.createElement("img");
       //Additional image information
-      img.src = data.images[this.currentIndex].src; //Uses currentIndex to change which image is wanted based on its position in the images array in response.json. Connects to the "src" element in each array entry.
+      img.src = data.images; // [this.currentIndex].src Uses currentIndex to change which image is wanted based on its position in the images array in response.json. Connects to the "src" element in each array entry.
       img.alt = "Random Fox";
       img.style.width = "480px";
       img.style.height = "370px";
