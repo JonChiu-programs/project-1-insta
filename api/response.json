@@ -9,7 +9,6 @@
     "images": [
     {
       "id": 1,
-      "sourceFile": "/api/response.json",
       "src": "https://randomfox.ca/images/1.jpg",
       "thumbnail": "https://randomfox.ca/images/1.jpg",
       "author": "Random Fox",
