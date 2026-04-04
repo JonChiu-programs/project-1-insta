@@ -253,7 +253,7 @@ handleEvent(e){
   //Adapted from cjh6976-prog's project; the additional comments are notes so I can better understand what's happening
   async loadFoxIntoSlide(slide) { //Takes this.slide as input
     try {
-      const response = await fetch("./response.json"); //Does the fetching of fox images.
+      const response = await fetch("/api/response.json"); //Does the fetching of fox images.
       const data = await response.json(); 
       slide.querySelectorAll("img").forEach(img => img.remove()); //Removes an existing image to make way for a new image; need to solve this.
       const img = document.createElement("img");
