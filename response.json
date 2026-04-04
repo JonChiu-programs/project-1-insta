@@ -1,4 +1,11 @@
 {
+  "author": {               
+    "last" : "Chiu",
+    "first": "Jon",
+    "startYear": "2025",
+    "thumbnailImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Anton_Faymann_038_Auto_Colour.jpg/250px-Anton_Faymann_038_Auto_Colour.jpg",
+    "channel":	"fox_gallery"
+  },
     "images": [
     {
       "id": 1,
